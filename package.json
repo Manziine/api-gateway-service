@@ -1,0 +1,35 @@
+{
+  "name": "api-gateway-service",
+  "version": "1.0.0",
+  "description": "Production-grade API Gateway with JWT auth, rate limiting (token bucket + sliding window), circuit breaker, and load balancing",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "test": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.0",
+    "ioredis": "^5.3.2",
+    "jsonwebtoken": "^9.0.2",
+    "express-async-errors": "^3.1.1",
+    "winston": "^3.13.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.8",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.5.2",
+    "ts-node-dev": "^2.0.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "ts-jest": "^29.1.5",
+    "eslint": "^9.5.0"
+  }
+}

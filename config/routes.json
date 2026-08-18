@@ -1,0 +1,45 @@
+{
+  "routes": [
+    {
+      "path": "/api/auth",
+      "upstream": ["http://auth-service:4001"],
+      "auth_required": false,
+      "rate_limit": {
+        "algorithm": "sliding_window",
+        "window_seconds": 60,
+        "max_requests": 10
+      }
+    },
+    {
+      "path": "/api/users",
+      "upstream": [
+        "http://user-service-1:4002",
+        "http://user-service-2:4002"
+      ],
+      "auth_required": true,
+      "rate_limit": {
+        "algorithm": "token_bucket",
+        "capacity": 100,
+        "refill_rate": 10
+      },
+      "circuit_breaker": {
+        "failure_threshold": 5,
+        "reset_timeout_ms": 30000
+      }
+    },
+    {
+      "path": "/api/orders",
+      "upstream": ["http://order-service:4003"],
+      "auth_required": true,
+      "rate_limit": {
+        "algorithm": "token_bucket",
+        "capacity": 50,
+        "refill_rate": 5
+      },
+      "circuit_breaker": {
+        "failure_threshold": 3,
+        "reset_timeout_ms": 60000
+      }
+    }
+  ]
+}
